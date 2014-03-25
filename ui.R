@@ -11,6 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 "  
 
 require(shiny)
+require(knitr)
 
 loadingBar <- tags$div(class="progress progress-striped active",
                        tags$div(class="bar", style="width: 100%;"))

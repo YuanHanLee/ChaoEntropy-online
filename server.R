@@ -1,5 +1,6 @@
 require(shiny)
 require(googleVis)
+require(knitr)
 # require(ggplot2)
 
 load("data/Ant.rda")

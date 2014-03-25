@@ -49,6 +49,7 @@ shinyServer(function(input, output) {
     
     ##  把文字檔轉成數個vector而成的list
     Fun <- function(e){
+      #  text change to character
       temp <- lapply(readLines(textConnection(text)), function(x) scan(text = x, what='char'))
       out <- list()
       out.name <- 0
@@ -102,7 +103,6 @@ shinyServer(function(input, output) {
   output$choose_dataset <- renderUI({
     dat <- getDataName()
     selectInput("dataset", "Select dataset:", choices = dat, selected = dat[1], multiple = TRUE)
-    
   })
   
   mymethod <- reactive({
@@ -142,25 +142,7 @@ shinyServer(function(input, output) {
       temp <- ChaoEntropyOnline(data=x, datatype=input$datatype, method=mymethod(),
                                 nboot=input$nboot, conf=input$conf)
       temp <- round(temp, 3)
-      
-      #       ##  gvis Picture
-      #       b <- data.frame(Methods=rownames(temp), temp)
-      #       rownames(b) <- NULL
-      #       colnames(b) <- c("Methods", "Estimator", "Bootstrap.s.e.", "Confidence Interval",
-      #                        "95 % Upper")
-      #       pic <- gvisCandlestickChart(
-      #         b, xvar="Methods", low="Confidence Interval",open="Estimator", close="Estimator",high="95 % Upper",
-      #         options=list(width='90%', height='90%', legend='none')
-      #       )
-      #       pic$html <- pic$html[-c(3:4)]
-      
-      ##  Picture
-      df <- data.frame(Methods=rownames(temp), temp)
-      rownames(df) <- NULL
-      colnames(df) <- c("Methods", "Estimator", "SE", "Lower", "Upper")
-      p <- ggplot(df, aes(Methods, Estimator, ymin=Lower, ymax=Upper, colour=Methods))
-      pic <- p + geom_errorbar(width = 0.5, size=2) + geom_point(size=5)
-      
+            
       ##  Google Vis Table
       output <- as.data.frame(temp)
       tab <- cbind(Methods=rownames(output), output)
@@ -176,12 +158,11 @@ shinyServer(function(input, output) {
       
       gis <- gvisTable(tab, options=list(width='90%', height='60%', allowHtml=TRUE))
       gis$html <- gis$html[-c(3:4)]
-      return(list(temp, gis, pic))
+      return(list(temp, gis))
     })
     out
   })
-  
-  
+   
   output$est <- renderPrint({
     dataset <- selectedData()
     out <- computation()
@@ -197,28 +178,25 @@ shinyServer(function(input, output) {
     return(gtab)
   })
   
+  ##  Picture
   output$visualization <- renderPlot({
     dataset <- selectedData()
     out <- computation()
     pic <- list()
     for (i in seq_along(dataset)) {
-      pic[i] <- list(out[[i]][[3]])
+      temp <- out[[i]][[1]]
+      index <- letters[1:nrow(temp)]
+      df <- data.frame(index, rownames(temp), temp)
+      rownames(df) <- NULL
+      colnames(df) <- c("id", "Methods", "Estimator", "SE", "Lower", "Upper")
+      p <- ggplot(df, aes(id, Estimator, ymin=Lower, ymax=Upper, colour=id))
+      pout <- p + geom_errorbar(width = 0.5, size=2) + geom_point(size=6) + labs(title=names(dataset[i])) + 
+        scale_color_discrete(name="Methods", breaks=index, labels=rownames(temp)) + 
+        scale_x_discrete(breaks=index, labels=rownames(temp))  
+      pic[i] <- list(pout)
     }
-    names(pic) <- input$dataset
-    print(pic)
+    print(multiplot4shiny(pic, cols=1))
   })
-    
-  #   output$visualization <- renderPrint({
-  #     dataset <- selectedData()
-  #     out <- computation()
-  #     pic <- list()
-  #     for (i in seq_along(dataset)) {
-  #       pic[i] <- list(out[[i]][[3]])
-  #     }
-  #     names(pic) <- input$dataset
-  #     return(pic)
-  #   })
-
   
   #Download ChaoEntropy output 
   output$dlest <- downloadHandler(

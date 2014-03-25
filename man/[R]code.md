@@ -23,11 +23,11 @@ Start R(studio) and copy-and-paste the commands below:
 ``` coffee
 # install.packages('devtools')
 require(devtools)
-install_github('ChaoEntropy','YuanHanLee')
+install_github('R-ChaoEntropy','YuanHanLee')
 require(ChaoEntropy)
 ```
 
-You also can download the **.zip** or **.tar.gz** file in this <a href="http://yuanhanlee.github.io/ChaoEntropy/" target="_blank">page</a>.
+You also can download the **.zip** or **.tar.gz** file in this <a href="http://yuanhanlee.github.io/R-ChaoEntropy/" target="_blank">page</a>.
 
 <h2 id="license">License</h2>
 The ChaoEntropy package is licensed under the GPLv2. See the files listed below for additional details. </font> 

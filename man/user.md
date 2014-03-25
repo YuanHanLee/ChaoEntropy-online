@@ -26,6 +26,7 @@ User Guide
 * [Output](#output)
   * [Data Summary](#summary)
   * [Esitmation](#chaoentropy)
+  * [Visualization](#vis)
 * [References](#reference)
 
 * * * * * * * *
@@ -116,8 +117,10 @@ This tab panel shows basic data information for the selected data. The output va
 _<h3 id="chaoentropy">Estimation</h3>_
 This tab panel shows the main output for **ChaoEntropy**. It show a table of various Shannon entropy estimators, their standard error and confidence interval which the method you choose. You also can click [Download as csv file]() to download the output table.
 
-<h2 id="reference">References</h2>
+_<h3 id="vis">Visualization</h3>_
+This tab panel shows the interactive estimator and confidence interval plot.
 
+<h2 id="reference">References</h2>
 1. Chao, A., Wang, Y. T. and Jost, L. (2013) Entropy and the species accumulation curve: a novel entropy estimator via discovery rates of new species. _Methods in Ecology and Evolution_, __4__, 1091-1100.
 
 2. Chao, A. & Jost, L. (2012) Coverage-based rarefaction and extrapolation: standardizing samples by completeness rather than size. _Ecology_, __93__, 2533-2547.

@@ -114,6 +114,11 @@ shinyUI(pageWithSidebar(
                  includeMarkdown("man/estimator_inc.md"))
       ),
       
+      tabPanel("Visualization", h3("Comparison with different methods"), 
+               loadingPanel,
+               plotOutput("visualization")
+      ),
+      
       #       tabPanel("Visualization", h3("Comparison with different methods"), 
       #                loadingPanel,
       #                htmlOutput("visualization"),

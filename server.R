@@ -1,7 +1,7 @@
 require(shiny)
 require(googleVis)
 require(knitr)
-# require(ggplot2)
+require(ggplot2)
 
 load("data/Ant.rda")
 load("data/Birds.rda")
@@ -9,7 +9,6 @@ load("data/Seedlings.rda")
 load("data/Spider.rda")
 
 source("sub/subfun.R")
-# source("sub/ChaoEntropyOnlineFunction.R")
 source("sub/entropyFunction.R")
 
 shinyServer(function(input, output) {
@@ -144,7 +143,7 @@ shinyServer(function(input, output) {
                                 nboot=input$nboot, conf=input$conf)
       temp <- round(temp, 3)
       
-      #       ##  Picture
+      #       ##  gvis Picture
       #       b <- data.frame(Methods=rownames(temp), temp)
       #       rownames(b) <- NULL
       #       colnames(b) <- c("Methods", "Estimator", "Bootstrap.s.e.", "Confidence Interval",
@@ -154,6 +153,13 @@ shinyServer(function(input, output) {
       #         options=list(width='90%', height='90%', legend='none')
       #       )
       #       pic$html <- pic$html[-c(3:4)]
+      
+      ##  Picture
+      df <- data.frame(Methods=rownames(temp), temp)
+      rownames(df) <- NULL
+      colnames(df) <- c("Methods", "Estimator", "SE", "Lower", "Upper")
+      p <- ggplot(df, aes(Methods, Estimator, ymin=Lower, ymax=Upper, colour=Methods))
+      pic <- p + geom_errorbar(width = 0.5, size=2) + geom_point(size=5)
       
       ##  Google Vis Table
       output <- as.data.frame(temp)
@@ -170,11 +176,11 @@ shinyServer(function(input, output) {
       
       gis <- gvisTable(tab, options=list(width='90%', height='60%', allowHtml=TRUE))
       gis$html <- gis$html[-c(3:4)]
-      return(list(temp, gis))
-      #       return(list(temp, gis, pic))
+      return(list(temp, gis, pic))
     })
     out
   })
+  
   
   output$est <- renderPrint({
     dataset <- selectedData()
@@ -191,6 +197,17 @@ shinyServer(function(input, output) {
     return(gtab)
   })
   
+  output$visualization <- renderPlot({
+    dataset <- selectedData()
+    out <- computation()
+    pic <- list()
+    for (i in seq_along(dataset)) {
+      pic[i] <- list(out[[i]][[3]])
+    }
+    names(pic) <- input$dataset
+    print(pic)
+  })
+    
   #   output$visualization <- renderPrint({
   #     dataset <- selectedData()
   #     out <- computation()
@@ -201,8 +218,7 @@ shinyServer(function(input, output) {
   #     names(pic) <- input$dataset
   #     return(pic)
   #   })
-  
-  
+
   
   #Download ChaoEntropy output 
   output$dlest <- downloadHandler(

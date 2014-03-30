@@ -1,6 +1,6 @@
 ChaoEntropy R code
 ================
-<font size="2">This program also provided the <a href="http://www.r-project.org/" target="_blank">R</a> code in the <a href="https://github.com/" target="_blank">GitHub</a> Pages.
+<font size="3">This program also provided the <a href="http://www.r-project.org/" target="_blank">R</a> code in the <a href="https://github.com/" target="_blank">GitHub</a> Pages.
 
 * [Overview](#overview2)
 * [Run the development version](#run)

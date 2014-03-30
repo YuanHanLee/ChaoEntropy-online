@@ -2,6 +2,9 @@ require(shiny)
 require(googleVis)
 require(knitr)
 require(ggplot2)
+# devtools::install_github("wesanderson","karthik")
+require(wesanderson)
+
 
 load("data/Ant.rda")
 load("data/Birds.rda")
@@ -102,7 +105,7 @@ shinyServer(function(input, output) {
   #Select data
   output$choose_dataset <- renderUI({
     dat <- getDataName()
-    selectInput("dataset", "Select dataset:", choices = dat, selected = dat[1], multiple = TRUE)
+    selectInput("dataset", "Select dataset:", choices = dat, selected = dat[1], multiple = TRUE, selectize=FALSE)
   })
   
   mymethod <- reactive({
@@ -190,10 +193,13 @@ shinyServer(function(input, output) {
       rownames(df) <- NULL
       colnames(df) <- c("id", "Methods", "Estimator", "SE", "Lower", "Upper")
       p <- ggplot(df, aes(id, Estimator, ymin=Lower, ymax=Upper, colour=id))
-      pout <- p + geom_errorbar(width = 0.5, size=2) + geom_point(size=6) + 
-        labs(title=names(dataset[i]), x="Methods") + 
-        scale_color_discrete(name="Methods", breaks=index, labels=rownames(temp)) + 
+      pout <- p + geom_errorbar(width = 0.5, size=2) + geom_point(size=6) + labs(title=names(dataset[i]), x="Methods") + 
+        scale_color_manual(values=c(wes.palette(5, "Darjeeling"), 1), name="Methods", breaks=index, labels=rownames(temp)) + 
         scale_x_discrete(breaks=index, labels=rownames(temp))  
+#       pout <- p + geom_errorbar(width = 0.5, size=2) + geom_point(size=6) + 
+#         labs(title=names(dataset[i]), x="Methods") + 
+#         scale_color_discrete(name="Methods", breaks=index, labels=rownames(temp)) + 
+#         scale_x_discrete(breaks=index, labels=rownames(temp))  
       pic[i] <- list(pout)
     }
     print(multiplot4shiny(pic, cols=1))

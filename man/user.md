@@ -11,7 +11,7 @@
 
 User Guide
 ================
-<font size="2">
+<font size="3">
 * [Overview](#overview)
   * [How to Cite](#cite)
 * [Data Settings](#data-settings)
@@ -37,7 +37,7 @@ The program **ChaoEntropy** (Shannon **entropy** proposed by **Chao** et al.) on
 _<h3 id="cite">How to Cite</h3>_
 <font color="ff0000">If you use **ChaoEntropy** to obtain results for publication, you should cite the papers (Chao, A., Wang, Y. T. and Jost, L. (2013) Entropy and the species accumulation curve: a novel entropy estimator via discovery rates of new species. _Methods in Ecology and Evolution_, __4__, 1091-1100.) along with the following reference for ChaoEntropy:
 
-<p style="padding-left: 30px;"> Lee, Y.-H., Tseng, K.-S. and Chao, A. (2014). ChaoEntropy online.</font>
+<p style="padding-left: 30px;"> Chao, A., Lee, Y.-H. and Tseng, K.-S. (2014). ChaoEntropy online.</font>
   
 To help refine **ChaoEntropy**, your comments or feedbacks would be welcome (please send them to chao@stat.nthu.edu.tw).
 

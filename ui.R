@@ -26,11 +26,8 @@ loadingMsg <- tags$div(class="modal", tabindex="-1", role="dialog",
 loadingPanel <- conditionalPanel("$('html').hasClass('shiny-busy')",
                                  loadingMsg)
 
-# loadingPanel <- conditionalPanel(paste("input.goButton > 0 &&", 
-#                                        "$('html').hasClass('shiny-busy')"),
-#                                  loadingMsg)
-
 shinyUI(navbarPage(
+  theme = "bootstrap.css",
   title=("ChaoEntropy Online"),
   tabPanel(("Shannon entropy"),
            h1("ChaoEntropy"),

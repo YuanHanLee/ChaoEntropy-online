@@ -3,7 +3,7 @@ require(shinyapps)
 runApp()
 Sys.setlocale(locale="en_US.UTF-8")
 shinyapps::setAccountInfo(name="yuanhan", token="4881B64B620AD253874E56C55F3E30A6", secret="QfoTdUh2d/n58/uInqLbF6QAD9se40X7vibPrSyB")
-deployApp(appName="ChaoEntropy-beta")
+deployApp(appName="ChaoEntropy")
 
 
 ## revise picture

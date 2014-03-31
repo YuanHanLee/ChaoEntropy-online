@@ -12,20 +12,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 require(shiny)
 require(knitr)
+require(shinyIncubator)
 
-
-loadingBar <- tags$div(class="progress progress-striped active",
-                       tags$div(class="bar", style="width: 100%;"))
-# Code for loading message
-loadingMsg <- tags$div(class="modal", tabindex="-1", role="dialog", 
-                       "aria-labelledby"="myModalLabel", "aria-hidden"="true",
-                       tags$div(class="modal-header",
-                                tags$h3(id="myModalHeader", "Loading...")),
-                       tags$div(class="modal-footer",
-                                loadingBar))
+# loadingBar <- tags$div(class="progress progress-striped active",
+#                        tags$div(class="bar", style="width: 100%;"))
+# # Code for loading message
+# loadingMsg <- tags$div(class="modal", tabindex="-1", role="dialog", 
+#                        "aria-labelledby"="myModalLabel", "aria-hidden"="true",
+#                        tags$div(class="modal-header",
+#                                 tags$h3(id="myModalHeader", "Loading...")),
+#                        tags$div(class="modal-footer",
+#                                 loadingBar))
 # The conditional panel to show when shiny is busy
-loadingPanel <- conditionalPanel("$('html').hasClass('shiny-busy')",
-                                 loadingMsg)
+# loadingPanel <- conditionalPanel("$('html').hasClass('shiny-busy')",
+#                                  loadingMsg)
+# loadingPanel <- conditionalPanel(paste("input.goButton > 0 &&", 
+#                                        "$('html').hasClass('shiny-busy')"),
+#                                  loadingMsg)
 
 shinyUI(navbarPage(
   theme = "bootstrap.css",
@@ -41,7 +44,7 @@ shinyUI(navbarPage(
                  tags$style(type="text/css", "textarea { max-width: 230px; }"),
                  tags$style(type='text/css', ".span4 { max-width: 300px; }")
                ),
-               
+               actionButton("goButton", "Run!"),
                p(h4("Data Setting")),
                wellPanel(
                  selectInput(inputId="datatype", label="Select data type:",
@@ -95,13 +98,14 @@ shinyUI(navbarPage(
                
              ),
              mainPanel(
+               progressInit(),
                tabsetPanel(
                  tabPanel("Data Summary", h3("Basic data information"),
-                          loadingPanel,
+#                           loadingPanel,
                           htmlOutput("data_summary")
                  ),
                  tabPanel("Estimation", h3("Estimation of entropy"), 
-                          loadingPanel,
+#                           loadingPanel,
                           htmlOutput('est'),
                           downloadLink("dlest", "Download as csv file"),
                           conditionalPanel(
@@ -113,8 +117,10 @@ shinyUI(navbarPage(
                  ),
                  
                  tabPanel("Visualization", h3("Comparison with different methods"), 
-                          loadingPanel,
+                          p("Note: Please wait a moment!"),
+#                           loadingPanel,
                           plotOutput("visualization", width="900px", height="600px")
+                          
                  ),
                  tabPanel("User Guide", includeMarkdown("man/user.md")),
                  tabPanel("R code", includeMarkdown("man/[R]code.md"))

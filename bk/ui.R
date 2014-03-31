@@ -113,8 +113,10 @@ shinyUI(navbarPage(
                  ),
                  
                  tabPanel("Visualization", h3("Comparison with different methods"), 
+                          p("Note: Please wait a moment!"),
                           loadingPanel,
                           plotOutput("visualization", width="900px", height="600px")
+                          
                  ),
                  tabPanel("User Guide", includeMarkdown("man/user.md")),
                  tabPanel("R code", includeMarkdown("man/[R]code.md"))

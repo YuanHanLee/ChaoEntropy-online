@@ -4,7 +4,7 @@ require(knitr)
 require(ggplot2)
 # devtools::install_github("wesanderson","karthik")
 require(wesanderson)
-devtools::install_github("shiny-incubator", "rstudio")
+# devtools::install_github("shiny-incubator", "rstudio")
 require(shinyIncubator)
 
 

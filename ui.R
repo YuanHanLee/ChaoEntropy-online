@@ -44,7 +44,7 @@ shinyUI(navbarPage(
                  tags$style(type="text/css", "textarea { max-width: 230px; }"),
                  tags$style(type='text/css', ".span4 { max-width: 300px; }")
                ),
-               actionButton("goButton", "Run!"),
+               actionButton("goButton", span("Run!", style="font-size: 40px"), icon = icon("rocket", "fa-3x")),
                p(h4("Data Setting")),
                wellPanel(
                  selectInput(inputId="datatype", label="Select data type:",
@@ -101,10 +101,12 @@ shinyUI(navbarPage(
                progressInit(),
                tabsetPanel(
                  tabPanel("Data Summary", h3("Basic data information"),
+                          icon = icon("list-alt"),
 #                           loadingPanel,
                           htmlOutput("data_summary")
                  ),
                  tabPanel("Estimation", h3("Estimation of entropy"), 
+                          icon = icon("thumbs-up"),
 #                           loadingPanel,
                           htmlOutput('est'),
                           downloadLink("dlest", "Download as csv file"),
@@ -117,13 +119,14 @@ shinyUI(navbarPage(
                  ),
                  
                  tabPanel("Visualization", h3("Comparison with different methods"), 
-                          p("Note: Please wait a moment!"),
+                          icon = icon("bar-chart-o"),
+#                           p("Note: Please wait a moment!"),
 #                           loadingPanel,
                           plotOutput("visualization", width="900px", height="600px")
                           
                  ),
-                 tabPanel("User Guide", includeMarkdown("man/user.md")),
-                 tabPanel("R code", includeMarkdown("man/[R]code.md"))
+                 tabPanel("User Guide", icon = icon("question-circle"),includeMarkdown("man/user.md")),
+                 tabPanel("R code", icon = icon("wrench"), includeMarkdown("man/[R]code.md"))
                )
              )
            )

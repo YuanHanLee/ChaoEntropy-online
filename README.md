@@ -21,9 +21,9 @@
 Start R(studio) and copy-and-paste the commands below:
 
 ```coffee
-# install.packages('shiny')
-require('shiny')
-runGitHub('ChaoEntropy-online', 'YuanHanLee')
+if (!require("shiny"))
+    install.packages("shiny")
+shiny::runGitHub('ChaoEntropy-online', 'YuanHanLee')
 ```
 
   

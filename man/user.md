@@ -87,14 +87,14 @@ _<h3 id="upload">Upload Data</h3>_
 
 <img src="abundance.png", width="300px", height="400px",align=center, border=3>
 
-<a href="https://www.dropbox.com/s/rkkegvo4hyjak1u/abundance.csv" download>Download abundance demo file</a>
+<a href="https://dl.dropboxusercontent.com/s/rkkegvo4hyjak1u/abundance.csv" >Download abundance demo file</a>
 
 * Upload incidence data:
 **In the file, each column also represents a data, and the first entry is the title of the dataset (the title is not allowed to start with a numerical digit), the second entry is the total number of sampling units, followed by the species incidences abundances (the number of sampling units that each species is found).**
 
 <img src="incidence.png", width="300px", height="400px", align=center, border=3>
 
-<a href="https://www.dropbox.com/s/yyu8h806346kfsm/incidence.csv" download>Download incidence demo file</a>
+<a href="https://dl.dropboxusercontent.com/s/yyu8h806346kfsm/incidence.csv" >Download incidence demo file</a>
 
 <h2 id="gen-settings">General settings</h2>
 _<h3 id="method">Method</h3>_

@@ -90,7 +90,7 @@ shinyUI(pageWithSidebar(
         checkboxGroupInput(inputId="method2", label="Select the methods:",
                            choices=c("Chao", "Observed"), selected=c("Chao", "Observed"))
       ),
-      numericInput(inputId="nboot", label="Number of bootstraps", value=100, min=1, max=1000, step=1),
+      numericInput(inputId="nboot", label="Number of bootstraps", value=100, min=1, max=1001, step=1),
       numericInput(inputId="conf", label="Confidence level", value=0.95, min=0, max=1, step=0.01)
     )
     
@@ -117,7 +117,7 @@ shinyUI(pageWithSidebar(
       tabPanel("Visualization", h3("Comparison with different methods"), 
                p("Note: Please wait a moment!"),
                loadingPanel,
-               plotOutput("visualization", width="900px", height="600px")
+               plotOutput("visualization", width="900px", height="auto")
       ),
       tabPanel("User Guide", includeMarkdown("man/user.md")),
       tabPanel("R code", includeMarkdown("man/[R]code.md"))

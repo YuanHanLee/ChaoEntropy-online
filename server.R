@@ -150,14 +150,11 @@ shinyServer(function(input, output) {
       output <- as.data.frame(temp)
       tab <- cbind(Methods=rownames(output), output)
       rownames(tab) <- NULL
-      tab$Estimator <- sprintf("%1.3f", tab$Estimator)
-      tab$'Bootstrap s.e.' <- sprintf("%1.3f", tab$'Bootstrap s.e.')
-      tab$'95 % Lower' <- sprintf("%1.3f", tab$'95 % Lower')
-      tab$'95 % Upper' <- sprintf("%1.3f", tab$'95 % Upper')
-      tab$Estimator <- sprintf("<center>%s</center>", tab$Estimator)
-      tab$'Bootstrap s.e.' <- sprintf("<center>%s</center>", tab$'Bootstrap s.e.')
-      tab$'95 % Lower' <- sprintf("<center>%s</center>", tab$'95 % Lower')
-      tab$'95 % Upper' <- sprintf("<center>%s</center>", tab$'95 % Upper')
+      for (i in 2:5) {
+        tab[, i] <- sprintf("%1.3f", tab[, i])
+        tab[, i] <- sprintf("<center>%s</center>", tab[, i])
+      }
+      
       
       gis <- gvisTable(tab, options=list(width='90%', height='60%', allowHtml=TRUE))
       gis$html <- gis$html[-c(3:4)]
@@ -181,6 +178,14 @@ shinyServer(function(input, output) {
     return(gtab)
   })
   
+  getNumberOfPlots <- reactive({
+    return(max(seq_along(input$dataset)))
+  })
+  getVarHeight <- function(){
+    return(getNumberOfPlots() * 400)
+  }
+  
+  
   ##  Picture
   output$visualization <- renderPlot({
     dataset <- selectedData()
@@ -199,7 +204,7 @@ shinyServer(function(input, output) {
       pic[i] <- list(pout)
     }
     print(multiplot4shiny(pic, cols=1))
-  })
+  }, height=getVarHeight)
   
   #Download ChaoEntropy output 
   output$dlest <- downloadHandler(

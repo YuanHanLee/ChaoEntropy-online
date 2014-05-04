@@ -138,4 +138,5 @@ This tab panel shows the interactive estimator and confidence interval plot.
 7. Chao, A. (1984) Nonparametric estimation of the number of classes in a population. _Scandinavian Journal of Statistics_, __11__, 265-270.
 
 8. Chao, A. (1987) Estimating the population size for capture-recapture data with unequal catchability. _Biometrics_, __43__, 783-791.
+
 </font>
